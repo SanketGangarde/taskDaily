@@ -1,2 +1,2 @@
 //sep 24
-today we will start developing this website
+today we will start developing this website.
