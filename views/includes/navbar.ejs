@@ -1,12 +1,41 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="/">TaskDaily</a>
-        <div class="navbar-nav ms-auto">
+
+        <div id="nav-website-name">
+            <a class="navbar-brand" href="/">TaskDaily</a>
+        </div>
+
+        <div id="menuBox" class="navbar-nav-links ms-auto menu-box d-none">
             <a class="nav-link" href="/">Home</a>
             <a class="nav-link" href="#">Contact</a>
             <a class="nav-link" href="/login">Login</a>
             <a class="nav-link" href="#">Logout</a>
             <a class="nav-link" href="#">Signup</a>
         </div>
+
+        <button id="menuBtn" class="border-0 bg-transparent" type="button">
+            <i class="fa-solid fa-bars" style="color:black; font-size:20px;"></i>
+        </button>
+
     </div>
 </nav>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const btn = document.getElementById("menuBtn");
+        const menu = document.getElementById("menuBox");
+
+        btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            menu.classList.toggle("d-none");
+        });
+
+        document.addEventListener("click", function (e) {
+            if (!menu.contains(e.target) && !btn.contains(e.target)) {
+                menu.classList.add("d-none");
+            }
+        });
+
+    });
+</script>

@@ -1,0 +1,65 @@
+<% layout("/layouts/boilerplate") %>
+    <h1>Teacher Dashboard</h1>
+
+    <div class="card-container">
+
+        <div class="card" style="width: 15rem; " id="manage-batch">
+            <img src="/images/manage-task.png" class="card-img-top" alt="Add task">
+            <div class="card-body">
+                <br>
+                <h5 class="card-title">Manage Batch</h5>
+
+
+            </div>
+        </div>
+
+        <div class="card" style="width: 15rem; " id="manage-assignment">
+            <img src="/images/manage-task.png" class="card-img-top" alt="Add task">
+            <div class="card-body">
+                <br>
+                <h5 class="card-title">Manage Assignment</h5>
+
+
+            </div>
+        </div>
+
+        <div class="card" style="width: 15rem;" id="manage-students">
+            <img src="/images/manage-students.png" class="card-img-top" alt="Add task">
+            <div class="card-body">
+                <h5 class="card-title">Manage Students</h5>
+
+
+            </div>
+        </div>
+
+        <div class="card" style="width: 15rem;" id="manage-profile">
+            <img src="/images/manage-profile.png" class="card-img-top" alt="Add task">
+            <div class="card-body">
+
+                <h5 class="card-title mt-3">Manage Profile</h5>
+
+
+            </div>
+        </div>
+
+        <div class="card" style="width: 15rem;" id="create-assigment">
+            <img src="/images/add-task.png" class="card-img-top" alt="Add task">
+            <div class="card-body">
+                <h5 class="card-title">Create Assignment</h5>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <script>
+
+        let manage_assignment = document.getElementById("manage-batch");
+        manage_assignment.addEventListener("click", () => {
+            window.location.href = "/batch";
+        })
+
+    </script>

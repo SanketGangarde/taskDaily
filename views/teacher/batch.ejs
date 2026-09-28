@@ -1,0 +1,170 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="container mt-4">
+
+        <h1 class="mb-4">Manage Batch</h1>
+
+        <div class="row g-4 batch-container">
+
+            <!-- Create Batch -->
+            <div class="col-md-4">
+
+                <div class="card shadow-sm batch-form-div">
+                    <div class="card-body">
+
+                        <h4 class="card-title mb-4">Create Batch</h4>
+
+                        <form action="/batch" method="POST">
+
+                            <div class="mb-3">
+                                <label for="batchName" class="form-label">
+                                    Batch Name
+                                </label>
+
+                                <input type="text" class="form-control" id="batchName" name="name"
+                                    placeholder="Enter batch name" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Batch Timing</label>
+
+                                <div class="d-flex gap-2">
+
+                                    <input type="time" class="form-control" name="time" required>
+
+                                    <select class="form-select" name="period" required>
+                                        <option value="" disabled selected>AM/PM</option>
+                                        <option value="AM">AM</option>
+                                        <option value="PM">PM</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="batchDuration" class="form-label">
+                                    Duration
+                                </label>
+
+                                <select class="form-select" id="batchDuration" name="duration" required>
+                                    <option value="">Select duration</option>
+                                    <option value="1 hour">1 Hour</option>
+                                    <option value="1.5 hours">1.5 Hours</option>
+                                    <option value="2 hours">2 Hours</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-dark w-100">
+                                Create Batch
+                            </button>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Manage Batches -->
+            <div class="col-md-8">
+
+                <div class="card shadow-sm batch-table-div">
+
+                    <div class="card-body">
+
+                        <h4 class="card-title mb-4">
+                            My Batches
+                        </h4>
+
+                        <div class="table-responsive">
+
+                            <table class="table table-hover align-middle">
+
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Batch Name</th>
+                                        <th>Timing</th>
+                                        <th>Duration</th>
+                                        <th>Students</th>
+                                        <th>Created</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <% if (batches.length===0) { %>
+
+                                        <tr>
+                                            <td colspan="7" class="text-center">
+                                                No batches created yet.
+                                            </td>
+                                        </tr>
+
+                                        <% } else { %>
+
+                                            <% batches.forEach((batch, index)=> { %>
+
+                                                <tr>
+                                                    <td>
+                                                        <%= index + 1 %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= batch.name %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= batch.timing %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= batch.duration %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= batch.students.length %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= batch.createdAt.toLocaleDateString('en-IN') %>
+                                                    </td>
+
+                                                    <td>
+
+                                                        <button class="btn btn-sm btn-outline-dark">
+                                                            + student
+                                                        </button>
+
+                                                        <button class="btn btn-sm btn-outline-secondary">
+                                                            Edit
+                                                        </button>
+
+                                                        <button class="btn btn-sm btn-outline-danger">
+                                                            Delete
+                                                        </button>
+
+                                                    </td>
+                                                </tr>
+
+                                                <% }) %>
+
+                                                    <% } %>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>

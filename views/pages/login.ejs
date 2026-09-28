@@ -1,26 +1,59 @@
 <% layout("/layouts/boilerplate") %>
 
-    <div class="row mt-3">
+    <div class="row mt-3 ">
 
-        <div class="col-6 offset-3 mt-3">
+        <div class="col-6 offset-3 mt-3 ">
 
-            <form action="/login" method="POST" validate class="needs-validation">
+            <form action="/login" method="POST" class="needs-validation" novalidate>
 
-                <h2 class="mb-3"> Login</h2>
+                <div id="toggle_student_teacher_admin">
+                    <h2 class="mb-3 "> Login</h2>
+
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                        <input type="radio" class="btn-check" name="role" value="student" id="btnradio1"
+                            autocomplete="off" checked>
+                        <label class="btn btn-outline-dark" for="btnradio1">student</label>
+
+                        <input type="radio" class="btn-check" name="role" value="teacher" id="btnradio2"
+                            autocomplete="off">
+                        <label class="btn  btn btn-outline-dark" for="btnradio2">teacher</label>
+
+                        <input type="radio" class="btn-check" name="role" value="admin" id="btnradio3"
+                            autocomplete="off">
+                        <label class="btn btn-outline-dark" for="btnradio3"> admin</label>
+                    </div>
+                </div>
 
                 <div class="mb-3">
 
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" name="username" placeholder="enter username" class="form-control" id="username"
-                        required>
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" placeholder="enter email" class="form-control" id="email" required>
+                    <div class="invalid-feedback">
+                        please enter email.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
 
+                </div>
+                <br>
 
-
-
+                <div class="col-mb-3">
 
                     <label for="password" class="form-label ">Password</label>
-                    <input type="password" name="password" placeholder="enter your password" class="form-control"
-                        id="password" required>
+                    <div class="password-wrapper">
+                        <input type="password" name="password" placeholder="enter your password"
+                            class="form-control password-input" id="password" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('password', this)"
+                            aria-label="Show password"><i class="fa-regular fa-eye"></i></button>
+                    </div>
+
+                    <div class="invalid-feedback">
+                        please enter password.
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
 
 
 
@@ -34,8 +67,8 @@
             <p class="switch-link offset-4 mt-4">Already have an account?</p>
 
             <div class="buttons">
-                <form method="GET" action="/login">
-                    <button type="submit" class="btn btn-dark mt-2 col-12">Login</button>
+                <form method="GET" action="/signup">
+                    <button type="submit" class="btn btn-dark mt-2 col-12">Signup</button>
                 </form>
             </div>
 
