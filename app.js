@@ -8,7 +8,6 @@ const ejsMate = require('ejs-mate');
 const app = express();
 const ExpressError = require('./ExpressError');
 const {loginSchema }= require('./schema.js');
-const routes = require('./routes/userRoute.js');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
@@ -17,6 +16,8 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const User = require("./models/users.js");
 passport.use(User.createStrategy());
 
+const routes = require('./routes/userRoute.js');
+const studentRoutes = require('./routes/studentRoute.js');
 
 function asyncWrap(func) {
   return (req,res,next) => {
@@ -105,6 +106,8 @@ const validateLogin = (req,res,next) => {
 
 
 app.use("/", routes);
+app.use("/", studentRoutes);
+
 
 
 app.get("/", isLoggedIn, asyncWrap( async(req,res) => {

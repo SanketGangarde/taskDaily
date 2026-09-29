@@ -1,0 +1,43 @@
+<% layout("/layouts/boilerplate") %>
+    <h1>Teacher Dashboard</h1>
+
+    <h2>Welcome, <%= info.name %>
+    </h2>
+
+
+
+
+
+    <div class="card-container">
+
+        <% info.batches.forEach(batch=> { %>
+
+            <div class="card" style="width: 15rem;" id="manage-batch" onClick="dailyTask('<%= batch._id %>')">
+                <img src="/images/manage-task.png" class="card-img-top" alt="Add task">
+                <div class="card-body">
+                    <br>
+                    <h5 class="card-title">
+                        <h4>
+                            <%= batch.name %>
+                        </h4>
+                    </h5>
+
+
+                </div>
+            </div>
+
+            <% }) %>
+
+
+
+
+    </div>
+
+
+    <script>
+
+        function dailyTask(batchId) {
+            window.location.href = `/student/${batchId}/task`;
+        }
+
+    </script>

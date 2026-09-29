@@ -83,9 +83,9 @@ router.post('/login', validateLogin, asyncWrap(async (req, res,next) => {
           return res.redirect("/dashboard");
           
         }
-        // if (user.role === "student") {
-        //   return res.redirect("/student");
-        // }
+        if (user.role === "student") {
+          return res.redirect("/student");
+        }
 
         // Unknown role
         return res.status(403).send("Invalid user role");
