@@ -99,8 +99,7 @@ router.post('/login', validateLogin, asyncWrap(async (req, res,next) => {
 router.post('/signup', asyncWrap(async (req, res) => {
     
    const { name, email, password,confirm_password, role } = req.body;
-   console.log("Signup request body:", req.body);
-    
+  
     if (password !== confirm_password) {
        return res.status(400).send("Passwords do not match");
     }
@@ -174,4 +173,76 @@ router.post('/batch', isTeacher, asyncWrap(async (req, res) => {
   res.redirect('/batch');
 }));
 
+router.get('/teacher/batches/:batchId/students', isTeacher, asyncWrap(async (req, res) => {
+  const batch = await Batch.findOne({
+    _id: req.params.batchId,
+    teacher: req.user._id
+  }).populate("students", "name email");
+
+  if (!batch) {
+    return res.status(404).send("Batch not found");
+  }
+
+  let student = null;// this is because before search in this page student will not there.
+  if (req.query.studentId) {
+    student = await User.findById(req.query.studentId).select('name email');
+  }
+
+  res.render("teacher/students", { batch, student });
+}));
+
+router.post(
+  '/teacher/batches/:batchId/students/search',
+  isTeacher,
+  asyncWrap(async (req, res) => {
+
+    const { email } = req.body;
+
+    const batch = await Batch.findOne({
+      _id: req.params.batchId,
+      teacher: req.user._id
+    }).populate("students", "name email");
+
+    if (!batch) {
+      return res.status(404).send("Batch not found");
+    }
+
+    const student = await User.findOne({
+      email: email.trim().toLowerCase(),
+      role: "student"
+    });
+
+    if (!student) {
+      return res.status(404).send("Student not found");
+    }
+
+    res.render("teacher/students", {
+      batch,
+      student
+    });
+  })
+);
+
+router.post(
+  '/teacher/batches/:batchId/students/:studentId/add',
+  isTeacher,
+  asyncWrap(async (req, res) => {
+      let {batchId,studentId} = req.params;
+
+      console.log(batchId,studentId);
+      let batch = await Batch.findOne({_id: batchId});
+      if (batch.students.includes(studentId)) {
+        return res.status(400).send("Student already exists in this batch");
+      }
+
+      batch.students.push(studentId);
+
+      await batch.save();
+
+
+      res.render("/teacher/students");
+
+
+  })
+);
 module.exports = router;

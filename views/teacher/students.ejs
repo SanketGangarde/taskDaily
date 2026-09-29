@@ -1,0 +1,174 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="container mt-4">
+
+        <!-- Batch Header -->
+        <div class="mb-4">
+            <h1>Manage Students</h1>
+
+            <p class="text-muted mb-0">
+                Batch: <strong>
+                    <%= batch.name %>
+                </strong>
+            </p>
+
+            <p class="text-muted">
+                Timing: <strong>
+                    <%= batch.timing %>
+                </strong>
+            </p>
+        </div>
+
+
+        <div class="row g-4">
+
+            <!-- Search Student -->
+            <div class="col-md-4">
+
+                <div class="card shadow-sm student-form">
+
+                    <div class="card-body">
+
+                        <h4 class="card-title mb-4">
+                            Add Student
+                        </h4>
+
+                        <% if (!student) { %>
+
+                            <!-- Search form -->
+                            <form action="/teacher/batches/<%= batch._id %>/students/search" method="POST">
+                                <div class="mb-3">
+                                    <label for="studentEmail" class="form-label">
+                                        Student Email
+                                    </label>
+
+                                    <input type="email" class="form-control" id="studentEmail" name="email"
+                                        placeholder="student@example.com" required>
+                                </div>
+
+                                <button type="submit" class="btn btn-dark w-100">
+                                    Search Student
+                                </button>
+                            </form>
+
+                            <% } else { %>
+
+                                <!-- Student found -->
+                                <div class="mb-3">
+                                    <label class="form-label">Student Found</label>
+
+                                    <div class="border rounded p-3">
+                                        <h5 class="mb-1">
+                                            <%= student.name %>
+                                        </h5>
+                                        <p class="text-muted mb-0">
+                                            <%= student.email %>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <form action="/teacher/batches/<%= batch._id %>/students/<%= student._id %>/add"
+                                    method="POST">
+                                    <button type="submit" class="btn btn-dark w-100">
+                                        Add Student
+                                    </button>
+                                </form>
+
+                                <% } %>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Students Table -->
+            <div class="col-md-8">
+
+                <div class="card shadow-sm student-table">
+
+                    <div class="card-body">
+
+                        <h4 class="card-title mb-4">
+                            Batch Students
+                        </h4>
+
+                        <div class="table-responsive">
+
+                            <table class="table table-hover align-middle">
+
+                                <thead class="table-dark">
+
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    <% if (batch.students.length===0) { %>
+
+                                        <tr>
+                                            <td colspan="4" class="text-center text-muted">
+                                                No students in this batch.
+                                            </td>
+                                        </tr>
+
+                                        <% } else { %>
+
+                                            <% batch.students.forEach((student, index)=> { %>
+
+                                                <tr>
+
+                                                    <td>
+                                                        <%= index + 1 %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= student.name %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= student.email %>
+                                                    </td>
+
+                                                    <td>
+
+                                                        <form
+                                                            action="/teacher/batches/<%= batch._id %>/students/<%= student._id %>/remove"
+                                                            method="POST" class="d-inline">
+
+                                                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                                Remove
+                                                            </button>
+
+                                                        </form>
+
+                                                    </td>
+
+                                                </tr>
+
+                                                <% }) %>
+
+                                                    <% } %>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
