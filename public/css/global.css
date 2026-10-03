@@ -6,11 +6,19 @@ body {
     margin: 0;
     background-color: #f2f3f4;
     font-family: Arial, sans-serif;
+    /* Reserve space so fixed navbar doesn't cover page content */
+    padding-top: 70px;
 }
 
 .navbar {
     background-color: #ffffff;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1500;
 }
 
 
@@ -18,6 +26,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 
 #nav-website-name {
@@ -49,7 +58,7 @@ main {
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: 60px;
+        top: 70px;
         right: 20px;
         background: white;
         padding: 10px;
@@ -63,8 +72,8 @@ main {
     }
 }
 #menuBtn {
-  position: fixed;
-  top: 15px;
-  right: 20px;
-  z-index: 1100;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 1100;
 }

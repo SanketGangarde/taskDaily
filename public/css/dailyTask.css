@@ -1,0 +1,12 @@
+.card-forms {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: -37px;
+  margin-left: 70px;
+  gap: 10px;
+}

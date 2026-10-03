@@ -1,7 +1,9 @@
 <% layout("/layouts/boilerplate") %>
+
+
     <h1>Manage Assignments</h1>
 
-    <form action="/teacher/assignments/confirm" method="POST">
+    <form action="/assignments/confirm" method="POST">
 
         <div class="mb-3">
             <label class="form-label">Assignment Title</label>
@@ -16,6 +18,22 @@
         <div class="mb-3">
             <label class="form-label">Due Date</label>
             <input type="date" name="dueDate" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="batch" class="form-label">Select Batch</label>
+
+            <select name="batch" id="batch" class="form-select" required>
+                <option value="" disabled selected>
+                    Select a batch
+                </option>
+
+                <% batches.forEach(batch=> { %>
+                    <option value="<%= batch._id %>">
+                        <%= batch.name %> - <%= batch.timing %>
+                    </option>
+                    <% }) %>
+            </select>
         </div>
 
         <button type="submit" class="btn btn-dark">

@@ -1,3 +1,112 @@
 <% layout("/layouts/boilerplate") %>
- <h1>dailyTask</h1>
- 
+
+    <div class="container mt-4">
+
+        <div class="mb-4">
+            <h1>Daily Tasks</h1>
+            <p class="text-muted">
+                Batch: <strong>
+                    <%= batch ? batch.name : (assignments[0] && assignments[0].batch ? assignments[0].batch.name : 'N/A'
+                        ) %>
+                </strong>
+            </p>
+        </div>
+
+        <% if (assignments.length===0) { %>
+
+            <div class="alert alert-secondary">
+                No assignments available for this batch.
+            </div>
+
+            <% } else { %>
+
+                <div class="row g-4 ">
+
+                    <% assignments.forEach(assignment=> { %>
+
+                        <div class="col-md-6 card-forms">
+
+                            <div class="card shadow-sm h-100">
+
+                                <div class="card-body ">
+
+                                    <h4 class="card-title">
+                                        <%= assignment.title %>
+                                    </h4>
+
+
+                                    <p class="card-text">
+                                        <%= assignment.description %>
+                                    </p>
+
+                                    <hr>
+
+                                    <p class="mb-2">
+                                        <strong>Due Date:</strong>
+                                        <%= assignment.dueDate.toLocaleDateString('en-IN') %>
+                                    </p>
+
+                                    <p class="mb-3">
+                                        <strong>Teacher:</strong>
+                                        <%= assignment.teacher.name %>
+                                    </p>
+
+
+
+                                    <div class="daily-task-from-btn ">
+
+                                        <form method="post" action="/assignments/<%= assignment._id %>/submit"
+                                            enctype="multipart/form-data">
+                                            <div class="mb-3">
+                                                <label for="images" class="form-label">Upload</label>
+                                                <input type="file" name="zip_file" accept=".zip" required
+                                                    class="form-control">
+                                            </div>
+
+                                            <button type="submit" class="btn btn-dark">Upload</button>
+                                        </form>
+
+                                        <div class="form-buttons">
+
+                                            <div class="">
+                                                <form method="get" action="/assignments/<%= assignment._id %>/download">
+                                                    <button type="submit" class="btn btn-dark">Download</button>
+                                                </form>
+                                            </div>
+
+                                            <div class="">
+                                                <form method="post"
+                                                    action="/assignments/<%= assignment._id %>/delete?_method=DELETE">
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            </div>
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <% }) %>
+
+                </div>
+
+                <% } %>
+
+    </div>
+
+    <style>
+
+    </style>

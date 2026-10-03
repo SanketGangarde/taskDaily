@@ -22,6 +22,12 @@ const assignmentSchema = new mongoose.Schema({
     required: true
   },
 
+  batch: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Batch",
+    required: true
+  },
+
   students: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
