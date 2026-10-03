@@ -1,79 +1,81 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    background-color: #f2f3f4;
-    font-family: Arial, sans-serif;
-    /* Reserve space so fixed navbar doesn't cover page content */
-    padding-top: 70px;
+  margin: 0;
+  background-color: #f2f3f4;
+  font-family: Arial, sans-serif;
+  /* Reserve space so fixed navbar doesn't cover page content */
+  padding-top: 70px;
 }
 
 .navbar {
-    background-color: #ffffff;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    z-index: 1500;
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+
+  z-index: 1500;
 }
 
-
 .navbar .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
 }
 
 #nav-website-name {
-    display: flex;
+  display: flex;
 }
 
 .navbar-nav-links {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  align-items: center;
+  margin-right: 2.7rem;
+  gap: 1rem;
 }
 
 .nav-link {
-    color: #1f2937;
-    text-decoration: none;
-    font-weight: 600;
+  color: #1f2937;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .nav-link:hover {
-    color: #2563eb;
+  color: #2563eb;
 }
 
 main {
-    padding: 2rem 1rem;
+  padding: 2rem 1rem;
 }
 
 @media (max-width: 750px) {
-    .menu-box {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 70px;
-        right: 20px;
-        background: white;
-        padding: 10px;
-        border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        z-index: 1000;
-    }
+  .menu-box {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+  }
 
-    .menu-box.hidden {
-        display: none;
-    }
+  .menu-box.hidden {
+    display: none;
+  }
 }
 #menuBtn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    z-index: 1100;
+  position: absolute;
+
+  top: 10px;
+  right: 20px;
+  z-index: 1100;
 }

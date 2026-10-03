@@ -1,0 +1,6 @@
+.env
+node_modules/
+# Coverage
+coverage/
+
+package-lock.json
