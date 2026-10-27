@@ -1,90 +1,159 @@
 <% layout("/layouts/boilerplate") %>
 
-    <div class="container mt-4">
+    <div class="container-fluid manage-batch-page">
 
-        <h1 class="mb-4">Manage Batch</h1>
+        <!-- Page Header -->
+        <div class="page-header">
+            <div>
+                <span class="page-eyebrow">TEACHER DASHBOARD</span>
+                <h1>Manage Batch</h1>
+                <p>Create, manage and monitor your student batches.</p>
+            </div>
+        </div>
+
 
         <div class="row g-4 batch-container">
 
-            <!-- Create Batch -->
-            <div class="col-md-4">
+            <!-- ================= CREATE BATCH ================= -->
+            <div class="col-lg-4 col-md-5">
 
-                <div class="card shadow-sm batch-form-div">
+                <div class="card batch-form-div">
+
                     <div class="card-body">
 
-                        <h4 class="card-title mb-4">Create Batch</h4>
+                        <div class="section-heading">
+                            <div class="section-icon">
+                                <i class="fa fa-plus"></i>
+                            </div>
+
+                            <div>
+                                <h4>Create Batch</h4>
+                                <p>Add a new batch for your students.</p>
+                            </div>
+                        </div>
+
 
                         <form action="/batch" method="POST">
 
-                            <div class="mb-3">
-                                <label for="batchName" class="form-label">
+                            <!-- Batch Name -->
+                            <div class="form-group">
+                                <label for="batchName">
                                     Batch Name
                                 </label>
 
                                 <input type="text" class="form-control" id="batchName" name="name"
-                                    placeholder="Enter batch name" required>
+                                    placeholder="e.g. Java Morning Batch" required>
                             </div>
 
-                            <div class="mb-3">
-                                <label class="form-label">Batch Timing</label>
 
-                                <div class="d-flex gap-2">
+                            <!-- Timing -->
+                            <div class="form-group">
 
-                                    <input type="time" class="form-control" name="time" required>
+                                <label>Batch Timing</label>
 
-                                    <select class="form-select" name="period" required>
-                                        <option value="" disabled selected>AM/PM</option>
+                                <div class="d-flex gap-1 time-input">
+
+
+
+
+                                    <!-- Hour -->
+                                    <input type="number" class="form-control" name="hour" placeholder="HH" min="1"
+                                        max="12" step="1" required>
+
+                                    <!-- Minute -->
+                                    <input type="number" class="form-control" name="minute" placeholder="MM" min="0"
+                                        max="59" step="1" required>
+
+                                    <select name="period" class="form-control" required>
                                         <option value="AM">AM</option>
                                         <option value="PM">PM</option>
                                     </select>
 
+
                                 </div>
+
                             </div>
 
-                            <div class="mb-3">
-                                <label for="batchDuration" class="form-label">
+                            <!-- Duration -->
+                            <div class="form-group">
+
+                                <label for="batchDuration">
                                     Duration
                                 </label>
 
                                 <select class="form-select" id="batchDuration" name="duration" required>
-                                    <option value="">Select duration</option>
-                                    <option value="1 hour">1 Hour</option>
-                                    <option value="1.5 hours">1.5 Hours</option>
-                                    <option value="2 hours">2 Hours</option>
+
+                                    <option value="" disabled selected>
+                                        Select duration
+                                    </option>
+
+                                    <option value="1 hour">
+                                        1 Hour
+                                    </option>
+
+                                    <option value="1.5 hours">
+                                        1.5 Hours
+                                    </option>
+
+                                    <option value="2 hours">
+                                        2 Hours
+                                    </option>
+
                                 </select>
+
                             </div>
 
-                            <button type="submit" class="btn btn-dark w-100">
+
+                            <button type="submit" class="create-batch-btn">
+                                <i class="fa fa-plus"></i>
                                 Create Batch
                             </button>
 
                         </form>
 
                     </div>
+
                 </div>
 
             </div>
 
+            <!-- ================= MANAGE BATCHES ================= -->
+            <div class="col-lg-8 col-md-7">
 
-            <!-- Manage Batches -->
-            <div class="col-md-8">
-
-                <div class="card shadow-sm batch-table-div">
+                <div class="card batch-table-div">
 
                     <div class="card-body">
 
-                        <h4 class="card-title mb-4">
-                            My Batches
-                        </h4>
+                        <div class="table-header">
+
+                            <div class="section-heading">
+
+                                <div class="section-icon">
+                                    <i class="fa fa-layer-group"></i>
+                                </div>
+
+                                <div>
+                                    <h4>My Batches</h4>
+                                    <p>View and manage your active batches.</p>
+                                </div>
+
+                            </div>
+
+                            <span class="batch-count">
+                                <%= batches.length %> Batches
+                            </span>
+
+                        </div>
+
 
                         <div class="table-responsive">
 
-                            <table class="table table-hover align-middle">
+                            <table class="table batch-table">
 
-                                <thead class="table-dark">
+                                <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Batch Name</th>
+                                        <th>Batch</th>
                                         <th>Timing</th>
                                         <th>Duration</th>
                                         <th>Students</th>
@@ -93,13 +162,28 @@
                                     </tr>
                                 </thead>
 
+
                                 <tbody>
 
                                     <% if (batches.length===0) { %>
 
                                         <tr>
-                                            <td colspan="7" class="text-center">
-                                                No batches created yet.
+                                            <td colspan="7">
+
+                                                <div class="empty-state">
+
+                                                    <div class="empty-icon">
+                                                        <i class="fa fa-folder-open"></i>
+                                                    </div>
+
+                                                    <h5>No batches yet</h5>
+
+                                                    <p>
+                                                        Create your first batch using the form.
+                                                    </p>
+
+                                                </div>
+
                                             </td>
                                         </tr>
 
@@ -108,46 +192,84 @@
                                             <% batches.forEach((batch, index)=> { %>
 
                                                 <tr>
-                                                    <td>
+
+                                                    <td class="batch-index">
                                                         <%= index + 1 %>
                                                     </td>
 
-                                                    <td>
-                                                        <%= batch.name %>
-                                                    </td>
 
                                                     <td>
-                                                        <%= batch.timing %>
+
+                                                        <div class="batch-name">
+                                                            <div class="batch-avatar">
+                                                                <%= batch.name.charAt(0).toUpperCase() %>
+                                                            </div>
+
+                                                            <strong>
+                                                                <%= batch.name %>
+                                                            </strong>
+                                                        </div>
+
                                                     </td>
+
+
+                                                    <td>
+                                                        <span class="info-badge">
+                                                            <i class="fa fa-clock"></i>
+                                                            <%= batch.timing && !/undefined/i.test(batch.timing) ?
+                                                                batch.timing : "Time not set" %>
+                                                        </span>
+                                                    </td>
+
 
                                                     <td>
                                                         <%= batch.duration %>
                                                     </td>
 
-                                                    <td>
-                                                        <%= batch.students.length %>
-                                                    </td>
 
                                                     <td>
+
+                                                        <span class="student-count">
+                                                            <i class="fa fa-users"></i>
+                                                            <%= batch.students.length %>
+                                                        </span>
+
+                                                    </td>
+
+
+                                                    <td class="created-date">
                                                         <%= batch.createdAt.toLocaleDateString('en-IN') %>
                                                     </td>
 
+
                                                     <td>
 
-                                                        <button class="btn btn-sm btn-outline-dark "
-                                                            onclick="addStudent('<%= batch._id %>')">
-                                                            <i class="fa fa-user-plus"></i>
-                                                        </button>
+                                                        <div class="action-buttons">
 
-                                                        <button class="btn btn-sm btn-outline-secondary">
-                                                            Edit
-                                                        </button>
+                                                            <button type="button" class="action-btn add-student"
+                                                                title="Add Student"
+                                                                onclick="addStudent('<%= batch._id %>')">
+                                                                <i class="fa fa-user-plus"></i>
+                                                            </button>
 
-                                                        <button class="btn btn-sm btn-outline-danger">
-                                                            Delete
-                                                        </button>
+
+                                                            <button type="button" class="action-btn edit-btn"
+                                                                title="Edit Batch"
+                                                                onclick="updateBatch('<%= batch._id %>')">
+                                                                <i class="fa fa-pen"></i>
+                                                            </button>
+
+
+                                                            <button type="button" class="action-btn delete-btn"
+                                                                title="Delete Batch"
+                                                                onclick="deleteBatch('<%= batch._id %>')">
+                                                                <i class="fa fa-trash"></i>
+                                                            </button>
+
+                                                        </div>
 
                                                     </td>
+
                                                 </tr>
 
                                                 <% }) %>
@@ -170,8 +292,22 @@
 
     </div>
 
+
     <script>
+
         function addStudent(batchId) {
-            window.location.href = `/teacher/batches/${batchId}/students`;
+            window.location.href =
+                `/teacher/batches/${batchId}/students`;
         }
+
+        function deleteBatch(batchId) {
+            window.location.href =
+                `/teacher/batches/${batchId}/delete`;
+        }
+
+        function updateBatch(batchId) {
+            window.location.href =
+                `/teacher/batches/${batchId}/update`;
+        }
+
     </script>
